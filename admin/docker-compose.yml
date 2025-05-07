@@ -19,6 +19,9 @@ services:
 
   prometheus:
     image: prom/prometheus:latest
+    networks:
+      - monitoring
+      - public
     ports:
       - 9090:9090
     command:
@@ -31,6 +34,9 @@ services:
 
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
+    networks:
+      - monitoring
+      - public
     ports:
       - 8080:8080
     volumes:
@@ -44,4 +50,4 @@ services:
 networks:
   monitoring:
   public:
-    external: true
+    # external: true
