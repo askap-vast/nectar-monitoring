@@ -3,7 +3,7 @@ services:
     image: grafana/grafana:latest
     labels:
       - traefik.enable=true
-      - traefik.http.routers.grafana.rule=Host(`grafana.vast-data.vast-survey.org`)
+      - traefik.http.routers.grafana.rule=Host(`grafana.vast-survey.org`)
       - traefik.http.routers.grafana.tls=true
       - traefik.http.routers.grafana.tls.certresolver=lets-encrypt
     networks:
@@ -51,4 +51,4 @@ services:
 networks:
   monitoring:
   public:
-    # external: true
+    external: true
