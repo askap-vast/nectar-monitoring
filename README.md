@@ -46,13 +46,13 @@ for the system.
 ## Dashboards
 
 [All dashboards can be found
-here.](https://grafana.vast-data.vast-survey.org/dashboards)
-|Dashboard|Description|
-|:---|:---|
-|Quick View|At-a-glance metrics for the system as a whole.|
-|System|Per-system performance metrics, including CPU, memory, storage, I/O, and network.|
-|Storage|Per-system storage metrics, including usage, location, and availability.|
-|Docker|Per-system Docker metrics, including container status, performance, and storage.|
+here.](https://grafana.vast-survey.org/dashboards)
+
+| Dashboard  | Description                                                                       |
+| :--------- | :-------------------------------------------------------------------------------- |
+| Quick View | At-a-glance metrics for the system as a whole.                                    |
+| System     | Per-system performance metrics, including CPU, memory, storage, I/O, and network. |
+| Docker     | Per-system Docker metrics, including container status, performance, and storage.  |
 
 ## Contributors
 
