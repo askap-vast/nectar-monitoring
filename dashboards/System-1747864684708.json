@@ -38,7 +38,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bemhszazoum80f"
+        "uid": "bemnyo3fbuc5cb"
       },
       "description": "Current 1m load average.",
       "fieldConfig": {
@@ -114,7 +114,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bemhszazoum80f"
+        "uid": "bemnyo3fbuc5cb"
       },
       "description": "History of 1m load average.",
       "fieldConfig": {
@@ -218,7 +218,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bemhszazoum80f"
+        "uid": "bemnyo3fbuc5cb"
       },
       "description": "Current CPU usage, per core.",
       "fieldConfig": {
@@ -290,7 +290,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bemhszazoum80f"
+            "uid": "bemnyo3fbuc5cb"
           },
           "editorMode": "code",
           "expr": "sort_by_label(sum(rate(node_cpu_seconds_total{instance=\"$server:9100\", mode!~\"idle\", cpu=~\"10|11|12|13|14|15\"}[1m])) by (cpu),\"cpu\")",
@@ -306,7 +306,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bemhszazoum80f"
+        "uid": "bemnyo3fbuc5cb"
       },
       "description": "History of CPU usage, per core.",
       "fieldConfig": {
@@ -410,7 +410,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bemhszazoum80f"
+        "uid": "bemnyo3fbuc5cb"
       },
       "description": "Current in-use RAM.",
       "fieldConfig": {
@@ -486,7 +486,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bemhszazoum80f"
+        "uid": "bemnyo3fbuc5cb"
       },
       "description": "History of in-use RAM.",
       "fieldConfig": {
@@ -590,7 +590,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bemhszazoum80f"
+        "uid": "bemnyo3fbuc5cb"
       },
       "description": "Current in-use RAM, by type.",
       "fieldConfig": {
@@ -662,7 +662,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bemhszazoum80f"
+            "uid": "bemnyo3fbuc5cb"
           },
           "editorMode": "code",
           "expr": "node_memory_Mapped_bytes{instance=\"$server:9100\"} / node_memory_MemTotal_bytes{instance=\"$server:9100\"}",
@@ -674,7 +674,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bemhszazoum80f"
+            "uid": "bemnyo3fbuc5cb"
           },
           "editorMode": "code",
           "expr": "node_memory_Cached_bytes{instance=\"$server:9100\"} / node_memory_MemTotal_bytes{instance=\"$server:9100\"}",
@@ -686,7 +686,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bemhszazoum80f"
+            "uid": "bemnyo3fbuc5cb"
           },
           "editorMode": "code",
           "expr": "(node_memory_SwapTotal_bytes{instance=\"$server:9100\"} - node_memory_SwapFree_bytes{instance=\"$server:9100\"}) / node_memory_SwapTotal_bytes{instance=\"$server:9100\"}",
@@ -702,7 +702,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bemhszazoum80f"
+        "uid": "bemnyo3fbuc5cb"
       },
       "description": "History of in-use RAM, by type.",
       "fieldConfig": {
@@ -801,7 +801,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bemhszazoum80f"
+            "uid": "bemnyo3fbuc5cb"
           },
           "editorMode": "code",
           "expr": "node_memory_Buffers_bytes{instance=\"$server:9100\"} / node_memory_MemTotal_bytes{instance=\"$server:9100\"}",
@@ -813,7 +813,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bemhszazoum80f"
+            "uid": "bemnyo3fbuc5cb"
           },
           "editorMode": "code",
           "expr": "node_memory_Mapped_bytes{instance=\"$server:9100\"} / node_memory_MemTotal_bytes{instance=\"$server:9100\"}",
@@ -825,7 +825,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bemhszazoum80f"
+            "uid": "bemnyo3fbuc5cb"
           },
           "editorMode": "code",
           "expr": "node_memory_Cached_bytes{instance=\"$server:9100\"} / node_memory_MemTotal_bytes{instance=\"$server:9100\"}",
@@ -837,7 +837,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bemhszazoum80f"
+            "uid": "bemnyo3fbuc5cb"
           },
           "editorMode": "code",
           "expr": "(node_memory_SwapTotal_bytes{instance=\"$server:9100\"} - node_memory_SwapFree_bytes{instance=\"$server:9100\"}) / node_memory_SwapTotal_bytes{instance=\"$server:9100\"}",
@@ -866,7 +866,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bemhszazoum80f"
+        "uid": "bemnyo3fbuc5cb"
       },
       "description": "Current in-use disk space.",
       "fieldConfig": {
@@ -942,7 +942,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bemhszazoum80f"
+        "uid": "bemnyo3fbuc5cb"
       },
       "description": "History of in-use disk space.",
       "fieldConfig": {
@@ -1046,7 +1046,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bemhszazoum80f"
+        "uid": "bemnyo3fbuc5cb"
       },
       "description": "Current in-use disk space, by mount point.",
       "fieldConfig": {
@@ -1111,7 +1111,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bemhszazoum80f"
+            "uid": "bemnyo3fbuc5cb"
           },
           "editorMode": "code",
           "expr": "(node_filesystem_size_bytes{instance=\"$server:9100\", mountpoint=\"/mnt/data\"} - node_filesystem_avail_bytes{instance=\"$server:9100\"}) / node_filesystem_size_bytes{instance=\"$server:9100\"}",
@@ -1123,7 +1123,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bemhszazoum80f"
+            "uid": "bemnyo3fbuc5cb"
           },
           "editorMode": "code",
           "expr": "(node_filesystem_size_bytes{instance=\"$server:9100\", mountpoint=\"/mnt/pipeline-runs\"} - node_filesystem_avail_bytes{instance=\"$server:9100\"}) / node_filesystem_size_bytes{instance=\"$server:9100\"}",
@@ -1142,7 +1142,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bemhszazoum80f"
+            "uid": "bemnyo3fbuc5cb"
           },
           "editorMode": "code",
           "expr": "(node_filesystem_size_bytes{instance=\"$server:9100\", mountpoint=\"/mnt/docker\"} - node_filesystem_avail_bytes{instance=\"$server:9100\"}) / node_filesystem_size_bytes{instance=\"$server:9100\"}",
@@ -1158,7 +1158,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bemhszazoum80f"
+        "uid": "bemnyo3fbuc5cb"
       },
       "description": "History of in-use disk space, by mount point.",
       "fieldConfig": {
@@ -1250,7 +1250,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bemhszazoum80f"
+            "uid": "bemnyo3fbuc5cb"
           },
           "editorMode": "code",
           "expr": "(node_filesystem_size_bytes{instance=\"$server:9100\", mountpoint=\"/mnt/data\"} - node_filesystem_avail_bytes{instance=\"$server:9100\"}) / node_filesystem_size_bytes{instance=\"$server:9100\"}",
@@ -1262,7 +1262,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bemhszazoum80f"
+            "uid": "bemnyo3fbuc5cb"
           },
           "editorMode": "code",
           "expr": "(node_filesystem_size_bytes{instance=\"$server:9100\", mountpoint=\"/mnt/pipeline-runs\"} - node_filesystem_avail_bytes{instance=\"$server:9100\"}) / node_filesystem_size_bytes{instance=\"$server:9100\"}",
@@ -1281,7 +1281,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bemhszazoum80f"
+            "uid": "bemnyo3fbuc5cb"
           },
           "editorMode": "code",
           "expr": "(node_filesystem_size_bytes{instance=\"$server:9100\", mountpoint=\"/mnt/docker\"} - node_filesystem_avail_bytes{instance=\"$server:9100\"}) / node_filesystem_size_bytes{instance=\"$server:9100\"}",
@@ -1293,7 +1293,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bemhszazoum80f"
+            "uid": "bemnyo3fbuc5cb"
           },
           "editorMode": "code",
           "expr": "(node_filesystem_size_bytes{instance=\"$server:9100\", mountpoint=\"/\"} - node_filesystem_avail_bytes{instance=\"$server:9100\"}) / node_filesystem_size_bytes{instance=\"$server:9100\"}",
@@ -1305,7 +1305,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bemhszazoum80f"
+            "uid": "bemnyo3fbuc5cb"
           },
           "editorMode": "code",
           "expr": "(node_filesystem_size_bytes{instance=\"$server:9100\", mountpoint=\"/opt/vast-sys\"} - node_filesystem_avail_bytes{instance=\"$server:9100\"}) / node_filesystem_size_bytes{instance=\"$server:9100\"}",
@@ -1334,7 +1334,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bemhszazoum80f"
+        "uid": "bemnyo3fbuc5cb"
       },
       "description": "Total current I/O operation rates, over given range.",
       "fieldConfig": {
@@ -1393,7 +1393,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bemhszazoum80f"
+            "uid": "bemnyo3fbuc5cb"
           },
           "editorMode": "code",
           "expr": "sum(rate(node_disk_written_bytes_total{instance=\"$server:9100\"}[$__range]))",
@@ -1409,7 +1409,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bemhszazoum80f"
+        "uid": "bemnyo3fbuc5cb"
       },
       "description": "History of total I/O operations rates, over given range.",
       "fieldConfig": {
@@ -1496,7 +1496,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bemhszazoum80f"
+            "uid": "bemnyo3fbuc5cb"
           },
           "editorMode": "code",
           "expr": "sum(rate(node_disk_written_bytes_total{instance=\"$server:9100\"}[$__range]))",
@@ -1512,7 +1512,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bemhszazoum80f"
+        "uid": "bemnyo3fbuc5cb"
       },
       "description": "Size of data written, over given range, per device.",
       "fieldConfig": {
@@ -1576,7 +1576,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bemhszazoum80f"
+        "uid": "bemnyo3fbuc5cb"
       },
       "description": "History of size of data written, over given range, per device.",
       "fieldConfig": {
@@ -1681,7 +1681,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bemhszazoum80f"
+        "uid": "bemnyo3fbuc5cb"
       },
       "description": "Total current network operation rates, over given range.",
       "fieldConfig": {
@@ -1740,7 +1740,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bemhszazoum80f"
+            "uid": "bemnyo3fbuc5cb"
           },
           "editorMode": "code",
           "expr": "sum(rate(node_network_transmit_bytes_total{instance=\"$server:9100\"}[$__range]))",
@@ -1756,7 +1756,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bemhszazoum80f"
+        "uid": "bemnyo3fbuc5cb"
       },
       "description": "History of total network operations rates, over given range.",
       "fieldConfig": {
@@ -1843,7 +1843,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bemhszazoum80f"
+            "uid": "bemnyo3fbuc5cb"
           },
           "editorMode": "code",
           "expr": "sum(rate(node_network_transmit_bytes_total{instance=\"$server:9100\"}[$__range]))",
@@ -1859,7 +1859,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bemhszazoum80f"
+        "uid": "bemnyo3fbuc5cb"
       },
       "description": "Total size of data received / sent, over given range.",
       "fieldConfig": {
@@ -1912,7 +1912,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bemhszazoum80f"
+            "uid": "bemnyo3fbuc5cb"
           },
           "editorMode": "code",
           "expr": "sum(increase(node_network_receive_bytes_total{instance=\"$server:9100\"}[$__range]))",
@@ -1935,7 +1935,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "bemhszazoum80f"
+        "uid": "bemnyo3fbuc5cb"
       },
       "description": "History of total size of data received / sent, over given range.",
       "fieldConfig": {
@@ -2016,7 +2016,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "bemhszazoum80f"
+            "uid": "bemnyo3fbuc5cb"
           },
           "editorMode": "code",
           "expr": "sum(increase(node_network_receive_bytes_total{instance=\"$server:9100\"}[$__range]))",
