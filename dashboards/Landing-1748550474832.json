@@ -1,0 +1,2541 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "[WIP] Landing summary page, for problem identification at a glance.",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 11,
+  "links": [],
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 13,
+      "panels": [],
+      "title": "Summary",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "System summary gauges.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "displayName": "${__field.label.name}",
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "text"
+              },
+              {
+                "color": "yellow",
+                "value": 80
+              },
+              {
+                "color": "orange",
+                "value": 90
+              },
+              {
+                "color": "red",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Docker"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "/4"
+              },
+              {
+                "id": "decimals",
+                "value": 0
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red"
+                    },
+                    {
+                      "color": "orange",
+                      "value": 3
+                    },
+                    {
+                      "color": "text",
+                      "value": 4
+                    },
+                    {
+                      "color": "orange",
+                      "value": 5
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "max",
+                "value": 4
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Memory"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decbytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Storage"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decbytes"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 5,
+        "x": 0,
+        "y": 1
+      },
+      "id": 1,
+      "options": {
+        "displayMode": "basic",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "left",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "text": {
+          "titleSize": 14,
+          "valueSize": 18
+        },
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "sum(node_load1) by (instance) / count(rate(node_cpu_seconds_total{instance=\"131.217.179.250:9100\", mode=\"system\"}[1m])) by (instance)",
+          "legendFormat": "CPU",
+          "range": true,
+          "refId": "cpu"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_memory_MemTotal_bytes{instance=\"131.217.179.250:9100\"} - node_memory_MemAvailable_bytes{instance=\"131.217.179.250:9100\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Memory",
+          "range": true,
+          "refId": "memory"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "sum(node_filesystem_size_bytes{instance=\"131.217.179.250:9100\"} - node_filesystem_avail_bytes{instance=\"131.217.179.250:9100\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Storage",
+          "range": true,
+          "refId": "storage"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.179.250:8080\", name=~\"admin-grafana-1|admin-prometheus-1|admin-cadvisor-1|traefik\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Docker",
+          "range": true,
+          "refId": "docker"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_memory_MemTotal_bytes{instance=\"131.217.179.250:9100\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Memory",
+          "range": true,
+          "refId": "max memory"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "sum(node_filesystem_size_bytes{instance=\"131.217.179.250:9100\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Storage",
+          "range": true,
+          "refId": "max storage"
+        }
+      ],
+      "title": "Admin",
+      "transformations": [
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "Memory"
+            },
+            "configRefId": "max memory",
+            "mappings": [
+              {
+                "fieldName": "Memory",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        },
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "Storage"
+            },
+            "configRefId": "max storage",
+            "mappings": [
+              {
+                "fieldName": "Storage",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "System summary gauges.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "displayName": "${__field.label.name}",
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "text"
+              },
+              {
+                "color": "yellow",
+                "value": 80
+              },
+              {
+                "color": "orange",
+                "value": 90
+              },
+              {
+                "color": "red",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Docker"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "/4"
+              },
+              {
+                "id": "decimals",
+                "value": 0
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red"
+                    },
+                    {
+                      "color": "orange",
+                      "value": 3
+                    },
+                    {
+                      "color": "text",
+                      "value": 4
+                    },
+                    {
+                      "color": "orange",
+                      "value": 5
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "max",
+                "value": 4
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Memory"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decbytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Storage"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decbytes"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 5,
+        "x": 5,
+        "y": 1
+      },
+      "id": 2,
+      "options": {
+        "displayMode": "basic",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "left",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "text": {
+          "titleSize": 14,
+          "valueSize": 18
+        },
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "sum(node_load1) by (instance) / count(rate(node_cpu_seconds_total{instance=\"131.217.179.90:9100\", mode=\"system\"}[1m])) by (instance)",
+          "legendFormat": "CPU",
+          "range": true,
+          "refId": "cpu"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_memory_MemTotal_bytes{instance=\"131.217.179.90:9100\"} - node_memory_MemAvailable_bytes{instance=\"131.217.179.90:9100\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Memory",
+          "range": true,
+          "refId": "memory"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "sum(node_filesystem_size_bytes{instance=\"131.217.179.90:9100\", mountpoint=~\"/|/home|/mnt/docker\"} - node_filesystem_avail_bytes{instance=\"131.217.179.90:9100\", mountpoint=~\"/|/home|/mnt/docker\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Storage",
+          "range": true,
+          "refId": "storage"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.179.90:8080\", name=~\"vast-jupyterhub-hub-1|vast-jupyterhub-database-1|interactive-cadvisor-1|traefik\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Docker",
+          "range": true,
+          "refId": "docker"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_memory_MemTotal_bytes{instance=\"131.217.179.90:9100\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Memory",
+          "range": true,
+          "refId": "max memory"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "sum(node_filesystem_size_bytes{instance=\"131.217.179.90:9100\", mountpoint=~\"/|/home|/mnt/docker\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Storage",
+          "range": true,
+          "refId": "max storage"
+        }
+      ],
+      "title": "Interactive",
+      "transformations": [
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "Memory"
+            },
+            "configRefId": "max memory",
+            "mappings": [
+              {
+                "fieldName": "Memory",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        },
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "Storage"
+            },
+            "configRefId": "max storage",
+            "mappings": [
+              {
+                "fieldName": "Storage",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "System summary gauges.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "displayName": "${__field.label.name}",
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "text"
+              },
+              {
+                "color": "yellow",
+                "value": 80
+              },
+              {
+                "color": "orange",
+                "value": 90
+              },
+              {
+                "color": "red",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Docker"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "/13"
+              },
+              {
+                "id": "decimals",
+                "value": 0
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red"
+                    },
+                    {
+                      "color": "orange",
+                      "value": 12
+                    },
+                    {
+                      "color": "text",
+                      "value": 13
+                    },
+                    {
+                      "color": "orange",
+                      "value": 14
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "max",
+                "value": 13
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Memory"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decbytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Storage"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decbytes"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 5,
+        "x": 10,
+        "y": 1
+      },
+      "id": 3,
+      "options": {
+        "displayMode": "basic",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "left",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "text": {
+          "titleSize": 14,
+          "valueSize": 18
+        },
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "sum(node_load1) by (instance) / count(rate(node_cpu_seconds_total{instance=\"131.217.179.25:9100\", mode=\"system\"}[1m])) by (instance)",
+          "legendFormat": "CPU",
+          "range": true,
+          "refId": "cpu"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_memory_MemTotal_bytes{instance=\"131.217.179.25:9100\"} - node_memory_MemAvailable_bytes{instance=\"131.217.179.25:9100\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Memory",
+          "range": true,
+          "refId": "memory"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "sum(node_filesystem_size_bytes{instance=\"131.217.179.25:9100\", mountpoint=~\"/|/mnt/docker|/mnt/postgres|/opt/vast-sys\"} - node_filesystem_avail_bytes{instance=\"131.217.179.25:9100\", mountpoint=~\"/|/mnt/docker|/mnt/postgres|/opt/vast-sys\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Storage",
+          "range": true,
+          "refId": "storage"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.179.25:8080\", name=~\"vast-pipeline-pipeline-1|vast-pipeline-database-1|vast-pipeline-index-web-1|vast-pipeline-index-database-1|validation-app-1|validation-database-1|carta-devops-backend-1|carta-devops-database-1|radio-star-catalogue-web-1|radio-star-catalogue-db-1|pghero-app-1|webapp-cadvisor-1|traefik\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Docker",
+          "range": true,
+          "refId": "docker"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_memory_MemTotal_bytes{instance=\"131.217.179.25:9100\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Memory",
+          "range": true,
+          "refId": "max memory"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "sum(node_filesystem_size_bytes{instance=\"131.217.179.25:9100\", mountpoint=~\"/|/mnt/docker|/mnt/postgres|/opt/vast-sys\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Storage",
+          "range": true,
+          "refId": "max storage"
+        }
+      ],
+      "title": "WebApp",
+      "transformations": [
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "Memory"
+            },
+            "configRefId": "max memory",
+            "mappings": [
+              {
+                "fieldName": "Memory",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        },
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "Storage"
+            },
+            "configRefId": "max storage",
+            "mappings": [
+              {
+                "fieldName": "Storage",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "System summary gauges.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "displayName": "${__field.label.name}",
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "text"
+              },
+              {
+                "color": "yellow",
+                "value": 80
+              },
+              {
+                "color": "orange",
+                "value": 90
+              },
+              {
+                "color": "red",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Docker"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "/2"
+              },
+              {
+                "id": "decimals",
+                "value": 0
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "text"
+                    },
+                    {
+                      "color": "orange",
+                      "value": 1
+                    },
+                    {
+                      "color": "text",
+                      "value": 2
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "max",
+                "value": 2
+              },
+              {
+                "id": "noValue",
+                "value": "TODO"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Memory"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decbytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Storage"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decbytes"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 20,
+        "y": 1
+      },
+      "id": 5,
+      "options": {
+        "displayMode": "basic",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "left",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "text": {
+          "titleSize": 14,
+          "valueSize": 18
+        },
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "sum(node_load1) by (instance) / count(rate(node_cpu_seconds_total{instance=\"131.217.178.98:9100\", mode=\"system\"}[1m])) by (instance)",
+          "legendFormat": "CPU",
+          "range": true,
+          "refId": "cpu"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_memory_MemTotal_bytes{instance=\"131.217.178.98:9100\"} - node_memory_MemAvailable_bytes{instance=\"131.217.178.98:9100\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Memory",
+          "range": true,
+          "refId": "memory"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "sum(node_filesystem_size_bytes{instance=\"131.217.178.98:9100\", mountpoint=\"/\"} - node_filesystem_avail_bytes{instance=\"131.217.178.98:9100\", mountpoint=\"/\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Storage",
+          "range": true,
+          "refId": "storage"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.178.98:8080\", name=~\"development-cadvisor-1|traefik\"}) or vector(NaN)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Docker",
+          "range": true,
+          "refId": "docker"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_memory_MemTotal_bytes{instance=\"131.217.178.98:9100\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Memory",
+          "range": true,
+          "refId": "max memory"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "sum(node_filesystem_size_bytes{instance=\"131.217.178.98:9100\", mountpoint=\"/\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Storage",
+          "range": true,
+          "refId": "max storage"
+        }
+      ],
+      "title": "Development",
+      "transformations": [
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "Memory"
+            },
+            "configRefId": "max memory",
+            "mappings": [
+              {
+                "fieldName": "Memory",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        },
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "Storage"
+            },
+            "configRefId": "max storage",
+            "mappings": [
+              {
+                "fieldName": "Storage",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "bargauge"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 7
+      },
+      "id": 14,
+      "panels": [],
+      "title": "Storage",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "System storage gauges, by mountpoint.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "displayName": "${__field.label.name}",
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "text"
+              },
+              {
+                "color": "yellow",
+                "value": 80
+              },
+              {
+                "color": "orange",
+                "value": 90
+              },
+              {
+                "color": "red",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 5,
+        "x": 0,
+        "y": 8
+      },
+      "id": 6,
+      "options": {
+        "displayMode": "basic",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 30,
+        "minVizHeight": 30,
+        "minVizWidth": 8,
+        "namePlacement": "top",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "manual",
+        "text": {
+          "titleSize": 12,
+          "valueSize": 14
+        },
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "node_filesystem_size_bytes{instance=\"131.217.179.250:9100\", mountpoint=\"/\"} - node_filesystem_avail_bytes{instance=\"131.217.179.250:9100\", mountpoint=\"/\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "/"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "node_filesystem_size_bytes{instance=\"131.217.179.250:9100\", mountpoint=\"/mnt/docker\"} - node_filesystem_avail_bytes{instance=\"131.217.179.250:9100\", mountpoint=\"/mnt/docker\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "docker"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "node_filesystem_size_bytes{instance=\"131.217.179.250:9100\", mountpoint=\"/opt/vast-sys\"} - node_filesystem_avail_bytes{instance=\"131.217.179.250:9100\", mountpoint=\"/opt/vast-sys\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "vast-sys"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "node_filesystem_size_bytes{instance=\"131.217.179.250:9100\", mountpoint=\"/mnt/data\"} - node_filesystem_avail_bytes{instance=\"131.217.179.250:9100\", mountpoint=\"/mnt/data\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "data"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "node_filesystem_size_bytes{instance=\"131.217.179.250:9100\", mountpoint=\"/mnt/pipeline-runs\"} - node_filesystem_avail_bytes{instance=\"131.217.179.250:9100\", mountpoint=\"/mnt/pipeline-runs\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "pipeline-runs"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "node_filesystem_size_bytes{instance=\"131.217.179.250:9100\", mountpoint=\"/\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "max root"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "node_filesystem_size_bytes{instance=\"131.217.179.250:9100\", mountpoint=\"/mnt/docker\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "max docker"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "node_filesystem_size_bytes{instance=\"131.217.179.250:9100\", mountpoint=\"/opt/vast-sys\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "max opt"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "node_filesystem_size_bytes{instance=\"131.217.179.250:9100\", mountpoint=\"/mnt/data\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "max data"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "node_filesystem_size_bytes{instance=\"131.217.179.250:9100\", mountpoint=\"/mnt/pipeline-runs\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "max pipeline"
+        }
+      ],
+      "title": "Storage",
+      "transformations": [
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "/"
+            },
+            "configRefId": "max root",
+            "mappings": [
+              {
+                "fieldName": "/",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        },
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "/mnt/docker"
+            },
+            "configRefId": "max docker",
+            "mappings": [
+              {
+                "fieldName": "/mnt/docker",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        },
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "/opt/vast-sys"
+            },
+            "configRefId": "max opt",
+            "mappings": [
+              {
+                "fieldName": "/opt/vast-sys",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        },
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "/mnt/data"
+            },
+            "configRefId": "max data",
+            "mappings": [
+              {
+                "fieldName": "/mnt/data",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        },
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "/mnt/pipeline-runs"
+            },
+            "configRefId": "max pipeline",
+            "mappings": [
+              {
+                "fieldName": "/mnt/pipeline-runs",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "System storage gauges, by mountpoint.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "displayName": "${__field.label.name}",
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "text"
+              },
+              {
+                "color": "yellow",
+                "value": 80
+              },
+              {
+                "color": "orange",
+                "value": 90
+              },
+              {
+                "color": "red",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 5,
+        "x": 5,
+        "y": 8
+      },
+      "id": 8,
+      "options": {
+        "displayMode": "basic",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 30,
+        "minVizHeight": 30,
+        "minVizWidth": 8,
+        "namePlacement": "top",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "manual",
+        "text": {
+          "titleSize": 12,
+          "valueSize": 14
+        },
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{instance=\"131.217.179.90:9100\", mountpoint=~\"/|/home|/mnt/docker\"} - node_filesystem_avail_bytes{instance=\"131.217.179.90:9100\", mountpoint=~\"/|/home|/opt/vast-sys|/mnt/docker\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "storage"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{instance=\"131.217.179.90:9100\", mountpoint=\"/\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "max root"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{instance=\"131.217.179.90:9100\", mountpoint=\"/mnt/docker\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "max docker"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{instance=\"131.217.179.90:9100\", mountpoint=\"/home\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "max home"
+        }
+      ],
+      "title": "Storage",
+      "transformations": [
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "/"
+            },
+            "configRefId": "max root",
+            "mappings": [
+              {
+                "fieldName": "/",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        },
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "/mnt/docker"
+            },
+            "configRefId": "max docker",
+            "mappings": [
+              {
+                "fieldName": "/mnt/docker",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        },
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "/home"
+            },
+            "configRefId": "max home",
+            "mappings": [
+              {
+                "fieldName": "/home",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "System storage gauges, by mountpoint.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "displayName": "${__field.label.name}",
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "text"
+              },
+              {
+                "color": "yellow",
+                "value": 80
+              },
+              {
+                "color": "orange",
+                "value": 90
+              },
+              {
+                "color": "red",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 5,
+        "x": 10,
+        "y": 8
+      },
+      "id": 10,
+      "options": {
+        "displayMode": "basic",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 30,
+        "minVizHeight": 30,
+        "minVizWidth": 8,
+        "namePlacement": "top",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "manual",
+        "text": {
+          "titleSize": 12,
+          "valueSize": 14
+        },
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{instance=\"131.217.179.25:9100\", mountpoint=\"/\"} - node_filesystem_avail_bytes{instance=\"131.217.179.25:9100\", mountpoint=\"/\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "/"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{instance=\"131.217.179.25:9100\", mountpoint=\"/mnt/docker\"} - node_filesystem_avail_bytes{instance=\"131.217.179.25:9100\", mountpoint=\"/mnt/docker\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "docker"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{instance=\"131.217.179.25:9100\", mountpoint=\"/opt/vast-sys\"} - node_filesystem_avail_bytes{instance=\"131.217.179.25:9100\", mountpoint=\"/opt/vast-sys\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "opt"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{instance=\"131.217.179.25:9100\", mountpoint=\"/mnt/postgres\"} - node_filesystem_avail_bytes{instance=\"131.217.179.25:9100\", mountpoint=\"/mnt/postgres\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "postgres"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{instance=\"131.217.179.25:9100\", mountpoint=\"/\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "max root"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{instance=\"131.217.179.25:9100\", mountpoint=\"/mnt/docker\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "max docker"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{instance=\"131.217.179.25:9100\", mountpoint=\"/opt/vast-sys\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "max opt"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{instance=\"131.217.179.25:9100\", mountpoint=\"/mnt/postgres\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "max postgres"
+        }
+      ],
+      "title": "Storage",
+      "transformations": [
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "/"
+            },
+            "configRefId": "max root",
+            "mappings": [
+              {
+                "fieldName": "/",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        },
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "/mnt/docker"
+            },
+            "configRefId": "max docker",
+            "mappings": [
+              {
+                "fieldName": "/mnt/docker",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        },
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "/opt/vast-sys"
+            },
+            "configRefId": "max opt",
+            "mappings": [
+              {
+                "fieldName": "/opt/vast-sys",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        },
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "/mnt/postgres"
+            },
+            "configRefId": "max postgres",
+            "mappings": [
+              {
+                "fieldName": "/mnt/postgres",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "System storage gauges, by mountpoint.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "displayName": "${__field.label.name}",
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "text"
+              },
+              {
+                "color": "yellow",
+                "value": 80
+              },
+              {
+                "color": "orange",
+                "value": 90
+              },
+              {
+                "color": "red",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "/"
+            },
+            "properties": [
+              {
+                "id": "max",
+                "value": 31591473152
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 20,
+        "y": 8
+      },
+      "id": 12,
+      "options": {
+        "displayMode": "basic",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 30,
+        "minVizHeight": 30,
+        "minVizWidth": 8,
+        "namePlacement": "top",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "manual",
+        "text": {
+          "titleSize": 12,
+          "valueSize": 14
+        },
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{instance=\"131.217.178.98:9100\", mountpoint=~\"/\"} - node_filesystem_avail_bytes{instance=\"131.217.178.98:9100\", mountpoint=~\"/\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "storage"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{instance=\"131.217.178.98:9100\", mountpoint=\"/\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "max root"
+        }
+      ],
+      "title": "Storage",
+      "transformations": [
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "/"
+            },
+            "configRefId": "max root",
+            "mappings": [
+              {
+                "fieldName": "/",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "bargauge"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 15
+      },
+      "id": 15,
+      "panels": [],
+      "title": "Docker",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "Status of expected containers, by name.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "displayName": "${__field.label.name}",
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "Down"
+                },
+                "1": {
+                  "color": "text",
+                  "index": 0,
+                  "text": "Up"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "from": 1,
+                "result": {
+                  "color": "orange",
+                  "index": 2
+                }
+              },
+              "type": "range"
+            }
+          ],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 5,
+        "x": 0,
+        "y": 16
+      },
+      "id": 7,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {
+          "titleSize": 14,
+          "valueSize": 18
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.179.250:8080\", name=\"admin-grafana-1\"}) or on() vector(0)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "admin-grafana-1",
+          "range": true,
+          "refId": "grafana"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.179.250:8080\", name=\"admin-prometheus-1\"}) or on() vector(0)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "admin-prometheus-1",
+          "range": true,
+          "refId": "prometheus"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.179.250:8080\", name=\"admin-cadvisor-1\"}) or on() vector(0)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "admin-cadvisor-1",
+          "range": true,
+          "refId": "cadvisor"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.179.250:8080\", name=\"traefik\"}) or on() vector(0)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "traefik",
+          "range": true,
+          "refId": "traefik"
+        }
+      ],
+      "title": "Docker",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "Status of expected containers, by name.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "displayName": "${__field.label.name}",
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "Down"
+                },
+                "1": {
+                  "color": "text",
+                  "index": 0,
+                  "text": "Up"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "from": 1,
+                "result": {
+                  "color": "orange",
+                  "index": 2
+                }
+              },
+              "type": "range"
+            }
+          ],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "text"
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "jupyter-[user]"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": []
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 5,
+        "x": 5,
+        "y": 16
+      },
+      "id": 9,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {
+          "titleSize": 14,
+          "valueSize": 18
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.179.90:8080\", name=~\"jupyter-.*\"}) or on() vector(0)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "jupyter-[user]",
+          "range": true,
+          "refId": "instances"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.179.90:8080\", name=\"vast-jupyterhub-hub-1\"}) or on() vector(0)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "vast-jupyterhub-hub-1",
+          "range": true,
+          "refId": "hub"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.179.90:8080\", name=\"vast-jupyterhub-database-1\"}) or on() vector(0)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "vast-jupyterhub-database-1",
+          "range": true,
+          "refId": "jhdb"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.179.90:8080\", name=\"interactive-cadvisor-1\"}) or on() vector(0)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "interactive-cadvisor-1",
+          "range": true,
+          "refId": "cadvisor"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.179.90:8080\", name=\"traefik\"}) or on() vector(0)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "traefik",
+          "range": true,
+          "refId": "traefik"
+        }
+      ],
+      "title": "Docker",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "Status of expected containers, by name.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "displayName": "${__field.label.name}",
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "Down"
+                },
+                "1": {
+                  "color": "text",
+                  "index": 0,
+                  "text": "Up"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "from": 1,
+                "result": {
+                  "color": "orange",
+                  "index": 2
+                }
+              },
+              "type": "range"
+            }
+          ],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "text"
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 5,
+        "x": 10,
+        "y": 16
+      },
+      "id": 11,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {
+          "titleSize": 14,
+          "valueSize": 18
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.179.25:8080\", name=\"vast-pipeline-pipeline-1\"}) or on() vector(0)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "vast-pipeline-pipeline-1",
+          "range": true,
+          "refId": "pl"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.179.25:8080\", name=\"vast-pipeline-database-1\"}) or on() vector(0)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "vast-pipeline-database-1",
+          "range": true,
+          "refId": "pldb"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.179.25:8080\", name=\"vast-pipeline-index-web-1\"}) or on() vector(0)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "vast-pipeline-index-web-1",
+          "range": true,
+          "refId": "pi"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.179.25:8080\", name=\"vast-pipeline-index-database-1\"}) or on() vector(0)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "vast-pipeline-index-database-1",
+          "range": true,
+          "refId": "pidb"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.179.25:8080\", name=\"validation-app-1\"}) or on() vector(0)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "validation-app-1",
+          "range": true,
+          "refId": "v"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.179.25:8080\", name=\"validation-database-1\"}) or on() vector(0)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "validation-database-1",
+          "range": true,
+          "refId": "vdb"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.179.25:8080\", name=\"carta-devops-backend-1\"}) or on() vector(0)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "carta-devops-backend-1",
+          "range": true,
+          "refId": "cdb"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.179.25:8080\", name=\"carta-devops-database-1\"}) or on() vector(0)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "carta-devops-database-1",
+          "range": true,
+          "refId": "cddb"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.179.25:8080\", name=\"radio-star-catalogue-web-1\"}) or on() vector(0)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "radio-star-catalogue-web-1",
+          "range": true,
+          "refId": "rscw"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.179.25:8080\", name=\"radio-star-catalogue-db-1\"}) or on() vector(0)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "radio-star-catalogue-db-1",
+          "range": true,
+          "refId": "rscdb"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.179.25:8080\", name=\"pghero-app-1\"}) or on() vector(0)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "pghero-app-1",
+          "range": true,
+          "refId": "pgh"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.179.25:8080\", name=\"webapp-cadvisor-1\"}) or on() vector(0)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "webapp-cadvisor-1",
+          "range": true,
+          "refId": "cadvisor"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "count(container_last_seen{instance=\"131.217.179.25:8080\", name=\"traefik\"}) or on() vector(0)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "traefik",
+          "range": true,
+          "refId": "traefik"
+        }
+      ],
+      "title": "Docker",
+      "type": "stat"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 41,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-3h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Landing",
+  "uid": "ef46d206-036b-43ee-b5fb-a84357993453",
+  "version": 6
+}

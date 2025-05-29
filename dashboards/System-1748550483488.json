@@ -1,0 +1,2256 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "Per-system performance metrics, including CPU, memory, storage, I/O, and network.",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 10,
+  "links": [],
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "panels": [],
+      "title": "CPU",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "Current CPU usage, by 1m, 5m, and 15m load averages.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "text"
+              },
+              {
+                "color": "yellow",
+                "value": 80
+              },
+              {
+                "color": "orange",
+                "value": 90
+              },
+              {
+                "color": "red",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 0,
+        "y": 1
+      },
+      "id": 7,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "node_load1{instance=\"$server:9100\"}",
+          "legendFormat": "1m",
+          "range": true,
+          "refId": "1"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_load5{instance=\"$server:9100\"}",
+          "hide": false,
+          "legendFormat": "5m",
+          "range": true,
+          "refId": "5"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_load15{instance=\"$server:9100\"}",
+          "hide": false,
+          "legendFormat": "15m",
+          "range": true,
+          "refId": "15"
+        }
+      ],
+      "title": "Usage",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "History CPU usage, by 1m, 5m, and 15m load averages.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 50,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "text"
+              },
+              {
+                "color": "yellow",
+                "value": 80
+              },
+              {
+                "color": "orange",
+                "value": 90
+              },
+              {
+                "color": "red",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "5m"
+            },
+            "properties": [
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "dash": [
+                    10,
+                    10
+                  ],
+                  "fill": "dash"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "15m"
+            },
+            "properties": [
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "dash": [
+                    0,
+                    10
+                  ],
+                  "fill": "dot"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 10,
+        "x": 4,
+        "y": 1
+      },
+      "id": 28,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "node_load1{instance=\"$server:9100\"}",
+          "legendFormat": "1m",
+          "range": true,
+          "refId": "1"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_load5{instance=\"$server:9100\"}",
+          "hide": false,
+          "legendFormat": "5m",
+          "range": true,
+          "refId": "5"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_load15{instance=\"$server:9100\"}",
+          "hide": false,
+          "legendFormat": "15m",
+          "range": true,
+          "refId": "15"
+        }
+      ],
+      "title": "Usage History",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "Current CPU usage, per core.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "text"
+              },
+              {
+                "color": "yellow",
+                "value": 80
+              },
+              {
+                "color": "orange",
+                "value": 90
+              },
+              {
+                "color": "red",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Cores"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "none"
+              },
+              {
+                "id": "decimals",
+                "value": 0
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "text",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 14,
+        "y": 1
+      },
+      "id": 9,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "count(rate(node_cpu_seconds_total{instance=\"$server:9100\", mode=\"system\"}[1m]))",
+          "hide": false,
+          "legendFormat": "Cores",
+          "range": true,
+          "refId": "cores"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(node_cpu_seconds_total{instance=\"$server:9100\", mode!~\"idle\", cpu!~\"1[0-9]\"}[1m])) by (cpu)",
+          "hide": true,
+          "legendFormat": "{{cpu}}",
+          "range": true,
+          "refId": "load"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(node_cpu_seconds_total{instance=\"$server:9100\", mode!~\"idle\", cpu=~\"1[0-9]\"}[1m])) by (cpu)",
+          "hide": true,
+          "legendFormat": "{{cpu}}",
+          "range": true,
+          "refId": "load2"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "avg(sum(rate(node_cpu_seconds_total{instance=\"$server:9100\", mode!~\"idle\"}[1m])) by (cpu))",
+          "hide": false,
+          "legendFormat": "Average Load",
+          "range": true,
+          "refId": "avg"
+        }
+      ],
+      "title": "Core Usage",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "History of CPU usage, per core, as a stacked time series.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 50,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text"
+              },
+              {
+                "color": "yellow",
+                "value": 0.8
+              },
+              {
+                "color": "orange",
+                "value": 0.9
+              },
+              {
+                "color": "red",
+                "value": 0.95
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 1
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "sum(rate(node_cpu_seconds_total{instance=\"$server:9100\", mode!~\"idle\"}[1m])) by (cpu)",
+          "legendFormat": "{{cpu}}",
+          "range": true,
+          "refId": "load"
+        }
+      ],
+      "title": "Core Usage History",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 2,
+      "panels": [],
+      "title": "Memory",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "Current in-use RAM.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "text"
+              },
+              {
+                "color": "yellow",
+                "value": 80
+              },
+              {
+                "color": "orange",
+                "value": 90
+              },
+              {
+                "color": "red",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "abs"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decbytes"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 0,
+        "y": 10
+      },
+      "id": 11,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "(node_memory_MemTotal_bytes{instance=\"$server:9100\"} - node_memory_MemAvailable_bytes{instance=\"$server:9100\"}) / node_memory_MemTotal_bytes{instance=\"$server:9100\"} ",
+          "legendFormat": "Relative",
+          "range": true,
+          "refId": "rel"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_memory_MemTotal_bytes{instance=\"$server:9100\"} - node_memory_MemAvailable_bytes{instance=\"$server:9100\"}",
+          "hide": false,
+          "legendFormat": "Total",
+          "range": true,
+          "refId": "abs"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_memory_MemTotal_bytes{instance=\"$server:9100\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Total",
+          "range": true,
+          "refId": "max"
+        }
+      ],
+      "title": "Usage",
+      "transformations": [
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byFrameRefID",
+              "options": "abs"
+            },
+            "configRefId": "max",
+            "mappings": [
+              {
+                "fieldName": "Total",
+                "handlerKey": "max",
+                "reducerId": "lastNotNull"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "History of in-use RAM.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds",
+            "seriesBy": "last"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 50,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "text"
+              },
+              {
+                "color": "yellow",
+                "value": 80
+              },
+              {
+                "color": "orange",
+                "value": 90
+              },
+              {
+                "color": "red",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 10,
+        "x": 4,
+        "y": 10
+      },
+      "id": 12,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "node_memory_MemTotal_bytes{instance=\"$server:9100\"} - node_memory_MemAvailable_bytes{instance=\"$server:9100\"}",
+          "legendFormat": "Used RAM",
+          "range": true,
+          "refId": "usage"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_memory_MemTotal_bytes{instance=\"$server:9100\"}",
+          "hide": false,
+          "legendFormat": "Used RAM",
+          "range": true,
+          "refId": "max"
+        }
+      ],
+      "title": "Usage History",
+      "transformations": [
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "Used RAM"
+            },
+            "configRefId": "max",
+            "mappings": [
+              {
+                "fieldName": "Used RAM",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "Current in-use RAM, by type.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "text"
+              },
+              {
+                "color": "yellow",
+                "value": 80
+              },
+              {
+                "color": "orange",
+                "value": 90
+              },
+              {
+                "color": "red",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Not Free"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "text",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 10,
+        "x": 14,
+        "y": 10
+      },
+      "id": 13,
+      "options": {
+        "displayMode": "basic",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_memory_Active_bytes{instance=\"$server:9100\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Active",
+          "range": true,
+          "refId": "active"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_memory_Inactive_bytes{instance=\"$server:9100\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Inactive",
+          "range": true,
+          "refId": "inactive"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_memory_Cached_bytes{instance=\"$server:9100\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Cached",
+          "range": true,
+          "refId": "cached"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_memory_SwapTotal_bytes{instance=\"$server:9100\"} - node_memory_SwapFree_bytes{instance=\"$server:9100\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Swap",
+          "range": true,
+          "refId": "swap"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_memory_MemTotal_bytes{instance=\"$server:9100\"} - node_memory_MemAvailable_bytes{instance=\"$server:9100\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Unavailable",
+          "range": true,
+          "refId": "avail"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_memory_MemTotal_bytes{instance=\"$server:9100\"} - node_memory_MemFree_bytes{instance=\"$server:9100\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Not Free",
+          "range": true,
+          "refId": "free"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_memory_MemTotal_bytes{instance=\"$server:9100\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "max"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_memory_SwapTotal_bytes{instance=\"$server:9100\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "max swap"
+        }
+      ],
+      "title": "Type Usage",
+      "transformations": [
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byRegexp",
+              "options": "Active|Inactive|Cached|Not Free|Unavailable"
+            },
+            "configRefId": "max",
+            "mappings": [
+              {
+                "fieldName": "{__name__=\"node_memory_MemTotal_bytes\", instance=\"131.217.179.25:9100\", job=\"node\"}",
+                "handlerKey": "max"
+              },
+              {
+                "fieldName": "{__name__=\"node_memory_MemTotal_bytes\", instance=\"131.217.179.250:9100\", job=\"node\"}",
+                "handlerKey": "max"
+              },
+              {
+                "fieldName": "{__name__=\"node_memory_MemTotal_bytes\", instance=\"131.217.179.90:9100\", job=\"node\"}",
+                "handlerKey": "max"
+              },
+              {
+                "fieldName": "{__name__=\"node_memory_MemTotal_bytes\", instance=\"131.217.178.98:9100\", job=\"node\"}",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        },
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "Swap"
+            },
+            "configRefId": "max swap",
+            "mappings": [
+              {
+                "fieldName": "{__name__=\"node_memory_SwapTotal_bytes\", instance=\"131.217.179.25:9100\", job=\"node\"}",
+                "handlerKey": "max"
+              },
+              {
+                "fieldName": "{__name__=\"node_memory_SwapTotal_bytes\", instance=\"131.217.179.250:9100\", job=\"node\"}",
+                "handlerKey": "max"
+              },
+              {
+                "fieldName": "{__name__=\"node_memory_SwapTotal_bytes\", instance=\"131.217.179.90:9100\", job=\"node\"}",
+                "handlerKey": "max"
+              },
+              {
+                "fieldName": "{__name__=\"node_memory_SwapTotal_bytes\", instance=\"131.217.178.98:9100\", job=\"node\"}",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "bargauge"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 18
+      },
+      "id": 3,
+      "panels": [],
+      "title": "Storage",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "Current available disk space.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "red"
+              },
+              {
+                "color": "orange",
+                "value": 5
+              },
+              {
+                "color": "yellow",
+                "value": 10
+              },
+              {
+                "color": "text",
+                "value": 20
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "abs"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decbytes"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 0,
+        "y": 19
+      },
+      "id": 15,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "(sum(node_filesystem_avail_bytes{instance=\"$server:9100\"})) / sum(node_filesystem_size_bytes{instance=\"$server:9100\"})",
+          "legendFormat": "Relative",
+          "range": true,
+          "refId": "rel"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "sum(node_filesystem_avail_bytes{instance=\"$server:9100\"})",
+          "hide": false,
+          "legendFormat": "Total",
+          "range": true,
+          "refId": "abs"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "sum(node_filesystem_size_bytes{instance=\"$server:9100\"})",
+          "hide": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "max"
+        }
+      ],
+      "title": "Available",
+      "transformations": [
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byFrameRefID",
+              "options": "abs"
+            },
+            "configRefId": "max",
+            "mappings": [
+              {
+                "fieldName": "Used Storage",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "History of available disk space.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 50,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "red"
+              },
+              {
+                "color": "orange",
+                "value": 5
+              },
+              {
+                "color": "yellow",
+                "value": 10
+              },
+              {
+                "color": "text",
+                "value": 20
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 10,
+        "x": 4,
+        "y": 19
+      },
+      "id": 16,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "sum(node_filesystem_avail_bytes{instance=\"$server:9100\", mountpoint=~\"/|/mnt.*|/opt.*|/home\"})",
+          "legendFormat": "Available",
+          "range": true,
+          "refId": "avail"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "sum(node_filesystem_size_bytes{instance=\"$server:9100\", mountpoint=~\"/|/mnt.*|/opt.*|/home\"})",
+          "hide": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "max"
+        }
+      ],
+      "title": "Available History",
+      "transformations": [
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "Available"
+            },
+            "configRefId": "max",
+            "mappings": [
+              {
+                "fieldName": "Value",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "Current available disk space, by mount point.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "text",
+            "mode": "fixed"
+          },
+          "decimals": 2,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "red"
+              },
+              {
+                "color": "orange",
+                "value": 5
+              },
+              {
+                "color": "yellow",
+                "value": 10
+              },
+              {
+                "color": "text",
+                "value": 20
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 10,
+        "x": 14,
+        "y": 19
+      },
+      "id": 17,
+      "options": {
+        "displayMode": "basic",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_avail_bytes{instance=\"$server:9100\", mountpoint!~\"/run.*\"}",
+          "hide": false,
+          "legendFormat": "{{mountpoint}}",
+          "range": true,
+          "refId": "avail"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{instance=\"$server:9100\", mountpoint=\"/\"}",
+          "hide": false,
+          "legendFormat": "Max",
+          "range": true,
+          "refId": "max root"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{instance=\"$server:9100\", mountpoint=\"/opt/vast-sys\"}",
+          "hide": false,
+          "legendFormat": "Max",
+          "range": true,
+          "refId": "max opt"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{instance=\"$server:9100\", mountpoint=\"/mnt/docker\"}",
+          "hide": false,
+          "legendFormat": "Max",
+          "range": true,
+          "refId": "max docker"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{instance=\"$server:9100\", mountpoint=\"/home\"}",
+          "hide": false,
+          "legendFormat": "Max",
+          "range": true,
+          "refId": "max home"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{instance=\"$server:9100\", mountpoint=\"/mnt/postgres\"}",
+          "hide": false,
+          "legendFormat": "Max",
+          "range": true,
+          "refId": "max postgres"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{instance=\"$server:9100\", mountpoint=\"/mnt/data\"}",
+          "hide": false,
+          "legendFormat": "Max",
+          "range": true,
+          "refId": "max data"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "node_filesystem_size_bytes{instance=\"$server:9100\", mountpoint=\"/mnt/pipeline-runs\"}",
+          "hide": false,
+          "legendFormat": "Max",
+          "range": true,
+          "refId": "max pipeline"
+        }
+      ],
+      "title": "Available Mount Space",
+      "transformations": [
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "/"
+            },
+            "configRefId": "max root",
+            "mappings": [
+              {
+                "fieldName": "Max",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        },
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "/opt/vast-sys"
+            },
+            "configRefId": "max opt",
+            "mappings": [
+              {
+                "fieldName": "Max",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        },
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "/mnt/docker"
+            },
+            "configRefId": "max docker",
+            "mappings": [
+              {
+                "fieldName": "Max",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        },
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "/home"
+            },
+            "configRefId": "max home",
+            "mappings": [
+              {
+                "fieldName": "Max",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        },
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "/mnt/postgres"
+            },
+            "configRefId": "max postgres",
+            "mappings": [
+              {
+                "fieldName": "Max",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        },
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "/mnt/data"
+            },
+            "configRefId": "max data",
+            "mappings": [
+              {
+                "fieldName": "Max",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        },
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "/mnt/pipeline-runs"
+            },
+            "configRefId": "max pipeline",
+            "mappings": [
+              {
+                "fieldName": "Max",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "bargauge"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 27
+      },
+      "id": 4,
+      "panels": [],
+      "title": "Disk",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "Total current I/O operation rates, over given range.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text"
+              }
+            ]
+          },
+          "unit": "Bps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 28
+      },
+      "id": 19,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "sum(rate(node_disk_read_bytes_total{instance=\"$server:9100\"}[$__range]))",
+          "legendFormat": "Reads",
+          "range": true,
+          "refId": "reads"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(node_disk_written_bytes_total{instance=\"$server:9100\"}[$__range]))",
+          "hide": false,
+          "legendFormat": "Writes",
+          "range": true,
+          "refId": "writes"
+        }
+      ],
+      "title": "I/O",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "History of I/O operation rates, over given range.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "text",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 50,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text"
+              }
+            ]
+          },
+          "unit": "Bps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Reads"
+            },
+            "properties": [
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "dash": [
+                    10,
+                    10
+                  ],
+                  "fill": "dash"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 4,
+        "y": 28
+      },
+      "id": 29,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "sum(rate(node_disk_read_bytes_total{instance=\"$server:9100\"}[$__range]))",
+          "legendFormat": "Reads",
+          "range": true,
+          "refId": "reads"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(node_disk_written_bytes_total{instance=\"$server:9100\"}[$__range]))",
+          "hide": false,
+          "legendFormat": "Writes",
+          "range": true,
+          "refId": "writes"
+        }
+      ],
+      "title": "I/O History",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "Total current network operation rates, over given range.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text"
+              }
+            ]
+          },
+          "unit": "Bps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 12,
+        "y": 28
+      },
+      "id": 24,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "sum(rate(node_network_receive_bytes_total{instance=\"$server:9100\"}[$__range]))",
+          "legendFormat": "Down",
+          "range": true,
+          "refId": "receives"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(node_network_transmit_bytes_total{instance=\"$server:9100\"}[$__range]))",
+          "hide": false,
+          "legendFormat": "Up",
+          "range": true,
+          "refId": "sends"
+        }
+      ],
+      "title": "Network",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "History of network operation rates, over given range.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "text",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 50,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text"
+              }
+            ]
+          },
+          "unit": "Bps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Down"
+            },
+            "properties": [
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "dash": [
+                    10,
+                    10
+                  ],
+                  "fill": "dash"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 28
+      },
+      "id": 30,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "sum(rate(node_network_receive_bytes_total{instance=\"$server:9100\"}[$__range]))",
+          "legendFormat": "Down",
+          "range": true,
+          "refId": "receives"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(node_network_transmit_bytes_total{instance=\"$server:9100\"}[$__range]))",
+          "hide": false,
+          "legendFormat": "Up",
+          "range": true,
+          "refId": "sends"
+        }
+      ],
+      "title": "Network History",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "Total I/O operation data, over given range.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "text",
+            "mode": "fixed"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text"
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 32
+      },
+      "id": 27,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "sum(increase(node_disk_read_bytes_total{instance=\"$server:9100\"}[$__range]))",
+          "legendFormat": "Read",
+          "range": true,
+          "refId": "reads"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "sum(increase(node_disk_written_bytes_total{instance=\"$server:9100\"}[$__range]))",
+          "hide": false,
+          "legendFormat": "Written",
+          "range": true,
+          "refId": "writes"
+        }
+      ],
+      "title": "I/O Data",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "bemnyo3fbuc5cb"
+      },
+      "description": "Total size of data received / sent, over given range.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "displayName": "${__field.label.name}",
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text"
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 12,
+        "y": 32
+      },
+      "id": 26,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "bemnyo3fbuc5cb"
+          },
+          "editorMode": "code",
+          "expr": "sum(increase(node_network_receive_bytes_total{instance=\"$server:9100\"}[$__range]))",
+          "hide": false,
+          "legendFormat": "Received",
+          "range": true,
+          "refId": "receives"
+        },
+        {
+          "editorMode": "code",
+          "expr": "sum(increase(node_network_transmit_bytes_total{instance=\"$server:9100\"}[$__range]))",
+          "legendFormat": "Sent",
+          "range": true,
+          "refId": "sends"
+        }
+      ],
+      "title": "Network Data",
+      "type": "stat"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 41,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "text": "131.217.179.250",
+          "value": "131.217.179.250"
+        },
+        "description": "VAST system from which to query metrics.",
+        "label": "Server",
+        "name": "server",
+        "options": [
+          {
+            "selected": true,
+            "text": "Admin",
+            "value": "131.217.179.250"
+          },
+          {
+            "selected": false,
+            "text": "Interactive",
+            "value": "131.217.179.90"
+          },
+          {
+            "selected": false,
+            "text": "WebApp",
+            "value": "131.217.179.25"
+          },
+          {
+            "selected": false,
+            "text": "Development",
+            "value": "131.217.178.98"
+          }
+        ],
+        "query": "Admin : 131.217.179.250, Interactive : 131.217.179.90, WebApp : 131.217.179.25, Development : 131.217.178.98",
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "System",
+  "uid": "649461c8-d638-4847-95d4-229aa2932f24",
+  "version": 8
+}
